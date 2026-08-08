@@ -13,6 +13,13 @@ lsb_release -a
 **Environment:** VirtualBox VM
 **Date of Audit:** August 2026
 
+## Tools Used
+- Ubuntu Linux
+- VirtualBox
+- Bash terminal
+- Git & GitHub
+
+
 
 **User & Group Audit**
 
