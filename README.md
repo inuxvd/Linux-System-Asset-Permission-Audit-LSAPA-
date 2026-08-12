@@ -126,6 +126,33 @@ The most challenging part wasn’t the commands themselves — it was keeping tr
 Overall, this project helped me build real-world security intuition, not just command memorization.
 
 
+## Remote SSH Access Setup (Windows Client → Ubuntu VM)
+
+This update documents the successful configuration of secure remote access from a Windows 11 host (HP Envy) to an Ubuntu Server virtual machine running on a Lenovo laptop via VirtualBox.
+
+### What Was Completed
+
+- Switched VirtualBox networking from **NAT** to **Bridged Adapter** to obtain a valid LAN IP.
+- Verified network connectivity and retrieved the VM’s IP using `ip a`.
+- Enabled and started the SSH service on Ubuntu using:
+  - `sudo systemctl enable --now ssh`
+  - `sudo systemctl status ssh`
+- Hardened SSH configuration by editing `/etc/ssh/sshd_config`:
+  - `PasswordAuthentication no`
+  - `PubkeyAuthentication yes`
+- Generated a new ED25519 SSH key pair on the Windows client using:
+  - `ssh-keygen -t ed25519`
+- Installed the client’s public key into the Ubuntu VM:
+  - Created `~/.ssh` directory
+  - Added key to `~/.ssh/authorized_keys`
+  - Set secure permissions (`chmod 700 ~/.ssh` and `chmod 600 ~/.ssh/authorized_keys`)
+- Successfully established a **passwordless SSH connection**:
+  - `ssh username@<VM-IP>`
+
+### Result
+
+Remote login is now fully functional and secured with key-based authentication.  
+This completes the foundational setup for future cybersecurity labs, audits, and automation projects.
 
 
 
