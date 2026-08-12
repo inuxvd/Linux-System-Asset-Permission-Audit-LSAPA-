@@ -155,4 +155,34 @@ Remote login is now fully functional and secured with key-based authentication.
 This completes the foundational setup for future cybersecurity labs, audits, and automation projects.
 
 
+## Linux Permissions & System Audit (Remote SSH Lab)
+
+This update documents a security-focused audit performed on the Ubuntu Server VM accessed remotely via SSH from a Windows 11 client. The goal was to understand Linux permissions, identify insecure configurations, and harden the system.
+
+### What Was Completed
+
+- Reviewed file and directory permissions using:
+  - `ls -la`
+  - `whoami`
+  - `groups`
+- Audited the `.ssh` directory and confirmed secure key permissions:
+  - `.ssh` → 700
+  - `authorized_keys` → 600
+- Identified and corrected insecure group-write permissions in the home directory:
+  - `chmod 755 tutorialdata`
+  - `chmod 644 tutorialdata.zip`
+- Performed a system-wide scan for world-writable files:
+  - `sudo find / -type f -perm 777`
+  - Result: No insecure files found.
+- Audited system users and groups via:
+  - `cat /etc/passwd`
+  - `cat /etc/group`
+- Verified login-capable accounts:
+  - Only `root` and the primary user (`inux`) have valid shells.
+
+### Result
+
+The Ubuntu VM is now properly hardened with secure permissions, validated user accounts, and no world-writable files. This completes a practical Linux security audit performed entirely through remote SSH access.
+
+
 
